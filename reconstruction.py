@@ -9,6 +9,7 @@ import sys
 
 def reconstruct(binfile, outfile):
     # Read in data and settings
+    uid = int(binfile.split('.')[0])
     with open(binfile, 'rb') as f:
         B = f.read()
     # Check length
