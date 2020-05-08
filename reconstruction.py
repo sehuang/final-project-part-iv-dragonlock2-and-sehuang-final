@@ -11,14 +11,10 @@ class IdentityReconstructor():
     def __init__(self, datadir):
         self.datadir = datadir
 
-    def reconstruct(self, uid):
+    def reconstruct(self, binfile, outfile):
         # Read in data and settings
-        binfile = os.path.join(self.datadir, str(uid) + '.bin')
         with open(binfile, 'rb') as f:
             B = f.read()
-        namefile = os.path.join(self.datadir, str(uid) + '.name')
-        with open(namefile, 'r') as f:
-            out = f.read()
         # Check length
         if len(B) == 0:
             print("Empty data!")
@@ -36,11 +32,10 @@ class IdentityReconstructor():
                 f.write(msg)
             return ffail
         # Write output
-        fout = os.path.join(self.datadir, out)
-        with open(fout, 'wb') as f:
+        with open(outfile, 'wb') as f:
             # Drop initial uint containing bit length
             f.write(B[4:])
-        return fout
+        return outfile
 
     def __repr__(self):
         return "IdentityReconstructor: data={}".format(self.datadir)
@@ -48,9 +43,10 @@ class IdentityReconstructor():
 
 def main():
     datadir = sys.argv[1]
-    uid = sys.argv[2]
+    binfile = sys.argv[2]
+    outfile = sys.argv[3]
     IR = IdentityReconstructor(datadir)
-    fname = IR.reconstruct(uid)
+    fname = IR.reconstruct(binfile, outfile)
     print("Reconstructed", fname)
     return 0
 
