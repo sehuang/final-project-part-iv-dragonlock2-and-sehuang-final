@@ -12,6 +12,10 @@ def reconstruct(binfile, outfile):
     uid = int(binfile.split('.')[0])
     with open(binfile, 'rb') as f:
         B = f.read()
+
+
+    ## For you to modify
+
     # Check length
     if len(B) == 0:
         print("Empty data!")
@@ -28,10 +32,13 @@ def reconstruct(binfile, outfile):
         with open(ffail, 'w') as f:
             f.write(msg)
         return ffail
+    data_out = B[4:]  # Drop uint containing bit length
+
+    ## Save as the given filename
     # Write output
     with open(outfile, 'wb') as f:
         # Drop initial uint containing bit length
-        f.write(B[4:])
+        f.write(data_out)
     return outfile
 
 
