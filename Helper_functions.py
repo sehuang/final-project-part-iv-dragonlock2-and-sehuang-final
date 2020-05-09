@@ -9,7 +9,7 @@ from bokeh.io import push_notebook
 from bokeh.resources import INLINE
 from bokeh.models import GlyphRenderer
 
-bk.output_notebook(INLINE)
+# bk.output_notebook(INLINE)
 
 import re
 
