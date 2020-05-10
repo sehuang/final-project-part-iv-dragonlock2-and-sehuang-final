@@ -7,6 +7,7 @@ from huffman import *
 from os import stat
 from PIL import Image
 from enum import Enum
+from wavelets import *
 
 
 class ValidTransforms(Enum):
