@@ -8,6 +8,7 @@ from os import stat
 from PIL import Image
 from enum import Enum
 from wavelets import *
+import pywt
 
 
 class ValidTransforms(Enum):
@@ -158,10 +159,12 @@ class JPEGEncoder:
         return block
 
     def wvlt(self, block):
-        pass
+        block_c = pywt.dwt2(block, 'Db3')
+        return block_c
 
-    def iwvlt(self, block):
-        pass
+    def iwvlt(self, coeffs):
+        block = pywt.idwt2(coeffs, "Db3")
+        return block
 
     def quantize(self, block_c, mode="y", quality=75):
         # Input:  a 2D float array, block_c, of DCT coefficients
